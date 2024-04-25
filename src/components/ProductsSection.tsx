@@ -1,6 +1,5 @@
 import React from "react";
 import { useProducts } from "../hooks/useProducts";
-import { useProductsById } from "../hooks/useProductById";
 import Loading from "./Loading";
 import CardProduct from "./CardProduct";
 
