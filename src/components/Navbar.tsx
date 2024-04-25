@@ -7,7 +7,7 @@ import ShoppingCartIcon from "../assets/icon/shopping-cart-outlined.svg";
 
 const Navbar = () => {
   return (
-    <nav className="flex h-24 justify-between items-center w-full bg-white lg:px-16 md:px-10">
+    <nav className="flex h-20 justify-between items-center w-full bg-white lg:px-16 md:px-10">
       <div className="flex gap-1 items-center">
         <img src="/logo.svg" alt="logo" />
         <h1 className="text-4xl font-bold">Furniro</h1>
@@ -17,7 +17,7 @@ const Navbar = () => {
         <li>
           <Link
             to="/"
-            className="transition duration-100 ease-in-out hover:text-gray-700 relative underline-animation"
+            className="underline-animation"
           >
             Home
           </Link>
@@ -25,23 +25,23 @@ const Navbar = () => {
         <li>
           <Link
             to="/shop"
-            className="transition duration-100 ease-in-out hover:text-gray-700 relative underline-animation"
+            className="underline-animation"
           >
             Shop
           </Link>
         </li>
         <li>
           <a
-            href="#"
-            className="transition duration-100 ease-in-out hover:text-gray-700 relative underline-animation"
+            href=""
+            className="underline-animation"
           >
             About
           </a>
         </li>
         <li>
           <a
-            href="#"
-            className="transition duration-100 ease-in-out hover:text-gray-700 relative underline-animation"
+            href=""
+            className="underline-animation"
           >
             Contact
           </a>

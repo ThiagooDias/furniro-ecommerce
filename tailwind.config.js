@@ -10,6 +10,7 @@ module.exports = {
           100: '#F9F1E7',
           200: "#FAF3EA",
         },
+        secondaryText: "#898989"
       },
     },
   },
