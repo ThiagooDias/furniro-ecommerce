@@ -44,7 +44,7 @@ export const useProducts = ({
     };
 
     loadProducts();
-  }, []);
+  }, [page, limit, name, category, isNew, maxPrice, sortBy, sortDirection]);
 
   return { products, error, loading };
 };

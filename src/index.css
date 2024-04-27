@@ -2,27 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 h1 {
   font-family: "Montserrat", sans-serif;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .underline-animation::after {
-  content: '';
+  content: "";
   display: block;
   width: 0;
   height: 2px;
   background: currentColor;
-  transition: width .3s ease-in-out;
+  transition: width 0.3s ease-in-out;
 }
 
 .underline-animation:hover::after {
   width: 100%;
 }
 
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.remove-arrow {
+  -moz-appearance: textfield;
+}

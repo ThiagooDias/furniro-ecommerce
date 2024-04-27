@@ -11,8 +11,11 @@ const Home: React.FC = () => {
     <div>
       <HeaderHome />
       <CategorySection />
+
       <h2 className="font-bold text-center text-4xl pb-8">Our Products</h2>
+
       <ProductsSection limit={8} />
+      
       <div className="flex justify-center mb-16">
         <Link
           className=" text-primary font-semibold border-2 border-primary hover:bg-primary hover:text-white py-3 px-16"
@@ -21,7 +24,9 @@ const Home: React.FC = () => {
           Show More
         </Link>
       </div>
+
       <Benefits />
+      
       <Footer />
     </div>
   );
