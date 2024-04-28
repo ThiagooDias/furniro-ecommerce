@@ -3,7 +3,7 @@ import { UseProductByIdResult } from "../interface/UseProductByIdResponse";
 import { Product } from "../interface/Product";
 import { fetchProductById } from "../api/products";
 
-export const useProductsById = (id: number): UseProductByIdResult => {
+export const useProductById = (id: string | undefined): UseProductByIdResult => {
   const [product, setProduct] = useState<Product>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -12,6 +12,7 @@ export const useProductsById = (id: number): UseProductByIdResult => {
     const loadProduct = async () => {
       try {
         const data = await fetchProductById(id);
+        
         setProduct(data);
         setLoading(false);
       } catch (error: unknown) {

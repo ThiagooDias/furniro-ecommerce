@@ -66,9 +66,10 @@ export const fetchProducts = async (
   }
 };
 
-export const fetchProductById = async (id: number): Promise<Product> => {
+export const fetchProductById = async (id: string | undefined): Promise<Product> => {
   try {
     const response = await API.get<Product>(`/product/${id}`);
+    
     return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {

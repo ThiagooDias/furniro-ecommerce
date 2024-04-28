@@ -2,14 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import filterIcon from "../assets/icon/icon_filtering.svg";
 import { UseCategoriesResult } from "../interface/UseCategoriesResponse";
 import { useCategories } from "../hooks/useCategories";
-import ApllayBtn from "./ApllayBtn";
 import { ModalFilterData } from "../interface/ModalFilterData";
+import ApllyBtn from "./ApllyBtn";
 
 interface FilterModalProps {
-  onUpdate: (data: ModalFilterData) => void
+  onUpdate: (data: ModalFilterData) => void;
 }
 
-const FilterModal: React.FC<FilterModalProps> = ({onUpdate}: FilterModalProps) => {
+const FilterModal: React.FC<FilterModalProps> = ({
+  onUpdate,
+}: FilterModalProps) => {
   const { categories }: UseCategoriesResult = useCategories();
 
   //Handle modal
@@ -64,7 +66,7 @@ const FilterModal: React.FC<FilterModalProps> = ({onUpdate}: FilterModalProps) =
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    onUpdate(formData)
+    onUpdate(formData);
   };
 
   return (
@@ -80,7 +82,6 @@ const FilterModal: React.FC<FilterModalProps> = ({onUpdate}: FilterModalProps) =
         <form
           action=""
           className="absolute z-30 flex gap-3 flex-col bg-orange-200 border rounded-xl shadow top-full mt-1 p-4 w-60"
-       
         >
           <h2 className="font-semibold text-xl">Filter products by:</h2>
           <div className="flex flex-col">
@@ -137,7 +138,7 @@ const FilterModal: React.FC<FilterModalProps> = ({onUpdate}: FilterModalProps) =
           </div> */}
 
           <div className="flex justify-center">
-            <ApllayBtn handleSubmit={handleSubmit} />
+            <ApllyBtn handleSubmit={handleSubmit} />
           </div>
         </form>
       )}

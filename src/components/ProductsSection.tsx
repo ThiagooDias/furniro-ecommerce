@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useProducts } from "../hooks/useProducts";
 import Loading from "./Loading";
 import CardProduct from "./CardProduct";
@@ -21,15 +21,17 @@ const ProductsSection: React.FC<ProductSectionProps> = (
 
   return (
     <div className="flex justify-center ">
-      <div className="grid grid-cols-4 gap-8 mb-10">
+ 
         {loading ? (
-          <div className="flex justify-center">
+          <div className="flex justify-center m-10">
             <Loading />
           </div>
         ) : error ? (
           <p>An error has occurred! Please reload the page</p>
         ) : (
-          products.map((product) => (
+          <div className="grid grid-cols-4 gap-8 mb-10">
+
+          {products.map((product) => (
             <CardProduct
               key={product.id}
               id={product.id}
@@ -41,9 +43,9 @@ const ProductsSection: React.FC<ProductSectionProps> = (
               discountPercent={product.discountPercent}
               isNew={product.isNew}
             />
-          ))
-        )}
+          ))}
       </div>
+        )}
     </div>
   );
 };

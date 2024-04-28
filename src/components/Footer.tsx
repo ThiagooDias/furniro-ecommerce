@@ -3,6 +3,7 @@ import React from "react";
 const Footer: React.FC = () => {
   return (
     <div className="py-12 px-24">
+      <hr className="bg-secondaryText mb-12"/>
       <div className="grid grid-cols-4">
         <div>
           <h3 className="text-2xl font-bold mb-12">Furniro.</h3>

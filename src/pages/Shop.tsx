@@ -3,13 +3,15 @@ import BenefitsSection from "../components/BenefitsSection";
 import Footer from "../components/Footer";
 import ProductsSection from "../components/ProductsSection";
 import shopImage from "../assets/shop-image.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import arrowIcon from "../assets/icon/arrow-down-alt2.svg";
 import gridRoundIcon from "../assets/icon/grid-big-round.svg";
 import viewListIcon from "../assets/icon/view-list.svg";
-import ApllayBtn from "../components/ApllayBtn";
 import FilterModal from "../components/FilterModal";
 import { ModalFilterData } from "../interface/ModalFilterData";
+import Pagination from "../components/Pagination";
+import ApllyBtn from "../components/ApllyBtn";
+import { useCategoryById } from "../hooks/useCategoryById";
 
 interface FormData {
   showCount: number;
@@ -17,33 +19,47 @@ interface FormData {
 }
 
 const Shop: React.FC = () => {
+  const location = useLocation();
+  
   const [modalFilterData, setModalFilterData] = useState<ModalFilterData>();
   const [isNew, setIsNew] = useState<boolean | undefined>(false);
-  const [category, setCategory] = useState<number | undefined>();
+  const [category, setCategory] = useState<number | undefined>(location.state);
   const [maxPrice, setMaxPrice] = useState<number | undefined>();
-  const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(16);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortDirection, setSortDirection] = useState<string>("DESC");
+  const [page, setPage] = useState<number>(1);
+  
+  const categoryName = useCategoryById(category?.toString())
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
 
   const [formData, setFormData] = useState<FormData>({
-    showCount: 16, // Valor inicial para o campo de entrada
-    sortBy: "default", // Valor inicial para o select
+    showCount: 16,
+    sortBy: "default",
   });
 
   useEffect(() => {
     setCategory(
       modalFilterData?.category
         ? parseInt(modalFilterData?.category)
-        : undefined
+        : location.state
     );
     setMaxPrice(
       modalFilterData?.maxPrice ? +modalFilterData?.maxPrice : undefined
     );
     setIsNew(modalFilterData?.isNew);
-
-    
-  }, [category, isNew, maxPrice, modalFilterData, limit, formData]);
+  }, [
+    category,
+    isNew,
+    maxPrice,
+    modalFilterData,
+    limit,
+    formData,
+    location.state,
+  ]);
 
   const handleModalFilterData = (data: ModalFilterData) => {
     setModalFilterData(data);
@@ -70,22 +86,18 @@ const Shop: React.FC = () => {
     if (formData?.sortBy === "az") {
       setSortBy("name");
       setSortDirection("ASC");
-
     } else if (formData?.sortBy === "highToLow") {
       setSortBy("price");
       setSortDirection("DESC");
-
     } else if (formData?.sortBy === "lowToHigh") {
       setSortBy("price");
       setSortDirection("ASC");
-
     } else if (formData?.sortBy === "default") {
       setSortBy("");
       setSortDirection("");
     }
 
     setLimit(formData?.showCount);
-
   };
 
   return (
@@ -93,13 +105,17 @@ const Shop: React.FC = () => {
       <div className="relative flex justify-center items-center">
         <img className="w-full h-full" src={shopImage} alt="" />
         <div className="absolute">
-          <h1 className="text-5xl font-semibold">Shop</h1>
+          <h1 className="text-5xl font-semibold text-center mb-3">Shop</h1>
           <span className="flex justify-between">
-            <Link className="font-semibold hover:underline" to={"/"}>
-              Home
-            </Link>
+            <p>Home</p>
             <img src={arrowIcon} alt="" />
             <p>Shop</p>
+            {category && (
+              <>
+                <img src={arrowIcon} alt="" />
+                <p>{categoryName.category?.name}</p>
+              </>
+            )}
           </span>
         </div>
       </div>
@@ -160,7 +176,7 @@ const Shop: React.FC = () => {
               <option value="lowToHigh">Low to high</option>
             </select>
           </div>
-          <ApllayBtn handleSubmit={handleSubmit} />
+          <ApllyBtn handleSubmit={handleSubmit} />
         </form>
       </div>
 
@@ -171,7 +187,11 @@ const Shop: React.FC = () => {
         limit={limit}
         sortBy={sortBy}
         sortDirection={sortDirection}
+        page={page}
       />
+      <div className="flex justify-center mb-20">
+        <Pagination onPageChange={handlePageChange} />
+      </div>
       <BenefitsSection />
       <Footer />
     </div>
