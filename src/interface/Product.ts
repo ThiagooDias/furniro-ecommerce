@@ -5,8 +5,8 @@ export interface Product {
   categoryId: number;
   description: string;
   largeDescription: string;
-  price: number;
-  discountPrice: number;
+  price: string;
+  currentPrice: string;
   discountPercent: number;
   isNew: boolean;
   imageLink: string;

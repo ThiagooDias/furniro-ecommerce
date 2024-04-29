@@ -10,7 +10,7 @@ const CategorySection: React.FC = () => {
   return (
     <div className="flex flex-col items-center pb-14">
       <h2 className="font-bold text-3xl py-24">Browse The Range</h2>
-      <div className="flex gap-5 text-center">
+      <div className="flex gap-5 text-center iphone12:flex-col md:flex-row">
         {loading ? (
           <Loading />
         ) : error ? (

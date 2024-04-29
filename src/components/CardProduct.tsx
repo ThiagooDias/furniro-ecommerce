@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import shareIcon from "../assets/icon/gridicons_share.svg";
 import heartIcon from "../assets/icon/Heart.svg";
 import comparaeIcon from "../assets/icon/compare-svgrepo-com.svg";
+import { formatCurrency } from "../utils/formatCurrency";
 
 interface CardProductProps {
   name: string;
   id: number;
   imageLink: string;
   category: number;
-  price: number;
-  discountPrice: number;
+  price: string;
+  currentPrice: string;
   discountPercent: number;
   isNew: boolean;
 }
@@ -19,12 +20,12 @@ const CardProduct: React.FC<CardProductProps> = ({
   name,
   id,
   imageLink,
-  category,
   price,
-  discountPrice,
+  currentPrice,
   discountPercent,
   isNew,
 }: CardProductProps) => {
+  
   return (
     <div className="group w-[285px] h-[446px] relative">
       <div className="hidden group-hover:block">
@@ -51,18 +52,19 @@ const CardProduct: React.FC<CardProductProps> = ({
       </div>
 
       <div className="w-[285px] h-[446px] bg-gray-100 relative">
-        {isNew && (
-          <div className="flex justify-center items-center bg-green-400 text-white size-12 absolute top-6 right-6 rounded-full">
-            <span>New</span>
-          </div>
-        )}
 
-        {discountPercent && (
+        {discountPercent !== 0  && (
           <div className="flex justify-center items-center bg-red-400 text-white size-12 absolute top-6 right-6 rounded-full">
             <span>-{discountPercent}%</span>
           </div>
         )}
 
+        {isNew && (
+          <div className="flex justify-center items-center bg-green-400 text-white size-12 absolute top-6 right-6 rounded-full">
+            <span>New</span>
+          </div>
+        )}
+        
         <div className="w-[285px] h-[300px] ">
           <img className="object-cover w-full h-full" src={imageLink} alt="" />
         </div>
@@ -72,10 +74,10 @@ const CardProduct: React.FC<CardProductProps> = ({
           <p className="text-secondaryText mb-2">Stylish cafe chair</p>
           <div className="flex gap-4">
             <p className="font-semibold text-xl">
-              Rp {discountPrice ? discountPrice : price}
+              Rp {formatCurrency(currentPrice)}
             </p>
-            {discountPrice && (
-              <del className="text-secondaryText">Rp {price}</del>
+            {discountPercent !== 0 && (
+              <del className="text-secondaryText">Rp {formatCurrency(price)}</del>
             )}
           </div>
         </div>

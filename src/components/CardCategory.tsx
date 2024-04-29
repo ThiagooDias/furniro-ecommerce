@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface CardCategoryProps {
-  id: number,
+  id: number;
   category: string;
   imageLink: string;
 }
@@ -12,17 +12,15 @@ const CardCategory: React.FC<CardCategoryProps> = ({
   category,
   imageLink,
 }: CardCategoryProps) => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleClick = () => {
-    navigate('shop', {state: id}) 
-  }
-  
+    navigate("shop", { state: id });
+  };
   return (
     <div>
       <img
-        className="mb-7 rounded-lg shadow-lg transform transition duration-300
-          hover:translate-y-1 hover:translate-x-1 hover:shadow-2xl cursor-pointer"
+        className="iphone12:w-80 mb-7 rounded-lg shadow-lg transform transition duration-300
+        hover:translate-y-1 hover:translate-x-1 hover:shadow-2xl cursor-pointer"
         src={imageLink}
         alt={`${category}`}
         onClick={handleClick}

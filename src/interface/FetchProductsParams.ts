@@ -4,6 +4,7 @@ export interface FetchProductsParams {
   name?: string;
   category?: number;
   isNew?: boolean;
+  withDiscount?: boolean;
   maxPrice?: number;
   sortBy?: string;
   sortDirection?: string;

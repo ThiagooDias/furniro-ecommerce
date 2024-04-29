@@ -7,7 +7,7 @@ import costumerSupport from "../assets/icon/customer-support.svg";
 
 const BenefitsSection: React.FC = () => {
   return (
-    <div className="flex justify-center gap-14 bg-secondary-200 py-24">
+    <div className="flex iphone12:flex-col iphone12:pl-6 md:flex-row justify-center gap-14 bg-secondary-200 py-24">
       <Benefict
         icone={trophy}
         title="High Quality"

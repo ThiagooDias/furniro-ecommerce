@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { UseProductsResult } from "../interface/UseProductsResponse";
-import { Product } from "../interface/Product";
 import { fetchProducts } from "../api/products";
 import { FetchProductsParams } from "../interface/FetchProductsParams";
+import { ProductQuery } from "../interface/ProductQuery";
 
 export const useProducts = ({
   page,
@@ -10,11 +10,12 @@ export const useProducts = ({
   name,
   category,
   isNew,
+  withDiscount,
   maxPrice,
   sortBy,
   sortDirection,
 }: FetchProductsParams): UseProductsResult => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [productsQuery, setProductsQuery] = useState<ProductQuery | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,11 +29,12 @@ export const useProducts = ({
           name,
           category,
           isNew,
+          withDiscount,
           maxPrice,
           sortBy,
           sortDirection,
         });
-        setProducts(data);
+        setProductsQuery(data);
         setLoading(false);
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -44,7 +46,7 @@ export const useProducts = ({
     };
 
     loadProducts();
-  }, [page, limit, name, category, isNew, maxPrice, sortBy, sortDirection]);
+  }, [page, limit, name, category, isNew, maxPrice, sortBy, sortDirection, withDiscount]);
 
-  return { products, error, loading };
+  return { productsQuery, error, loading };
 };

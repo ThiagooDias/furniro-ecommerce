@@ -3,7 +3,7 @@ import BenefitsSection from "../components/BenefitsSection";
 import Footer from "../components/Footer";
 import ProductsSection from "../components/ProductsSection";
 import shopImage from "../assets/shop-image.png";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import arrowIcon from "../assets/icon/arrow-down-alt2.svg";
 import gridRoundIcon from "../assets/icon/grid-big-round.svg";
 import viewListIcon from "../assets/icon/view-list.svg";
@@ -20,17 +20,22 @@ interface FormData {
 
 const Shop: React.FC = () => {
   const location = useLocation();
-  
+
   const [modalFilterData, setModalFilterData] = useState<ModalFilterData>();
   const [isNew, setIsNew] = useState<boolean | undefined>(false);
+  const [withDiscount, setWithDiscount] = useState<boolean | undefined>(false);
   const [category, setCategory] = useState<number | undefined>(location.state);
   const [maxPrice, setMaxPrice] = useState<number | undefined>();
   const [limit, setLimit] = useState<number>(16);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortDirection, setSortDirection] = useState<string>("DESC");
   const [page, setPage] = useState<number>(1);
-  
-  const categoryName = useCategoryById(category?.toString())
+
+  const [startIndex, setStartIndex] = useState<number | undefined>();
+  const [endIndex, setEndIndex] = useState<number | undefined>();
+  const [results, setResults] = useState<number | undefined>();
+
+  const categoryName = useCategoryById(category?.toString());
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -51,6 +56,7 @@ const Shop: React.FC = () => {
       modalFilterData?.maxPrice ? +modalFilterData?.maxPrice : undefined
     );
     setIsNew(modalFilterData?.isNew);
+    setWithDiscount(modalFilterData?.withDiscount);
   }, [
     category,
     isNew,
@@ -103,7 +109,7 @@ const Shop: React.FC = () => {
   return (
     <div>
       <div className="relative flex justify-center items-center">
-        <img className="w-full h-full" src={shopImage} alt="" />
+        <img className="iphone12:h-52 md:w-full md:h-full" src={shopImage} alt="" />
         <div className="absolute">
           <h1 className="text-5xl font-semibold text-center mb-3">Shop</h1>
           <span className="flex justify-between">
@@ -120,7 +126,7 @@ const Shop: React.FC = () => {
         </div>
       </div>
 
-      <div className="h-20 bg-secondary-100 mb-16 px-24 flex justify-between items-center">
+      <div className="iphone12:grid iphone12:gap-7 iphone12:p-5 md:flex md:h-20 bg-secondary-100 mb-16 md:px-24 justify-between items-center">
         <div className="flex items-center gap-5">
           <FilterModal onUpdate={handleModalFilterData} />
 
@@ -133,7 +139,7 @@ const Shop: React.FC = () => {
           </button>
 
           <div className="border-l-2 h-9 border-gray-400 pl-8 flex items-center">
-            Showing 1–16 of 32 results
+            Showing {startIndex}–{endIndex} of {results} results
           </div>
         </div>
 
@@ -182,15 +188,25 @@ const Shop: React.FC = () => {
 
       <ProductsSection
         isNew={isNew}
+        withDiscount={withDiscount}
         category={category}
         maxPrice={maxPrice}
         limit={limit}
         sortBy={sortBy}
         sortDirection={sortDirection}
         page={page}
+        onPagination={(i) => {
+          setEndIndex(i.endIndex);
+          setStartIndex(i.startIndex);
+          setResults(i.results);
+        }}
       />
       <div className="flex justify-center mb-20">
-        <Pagination onPageChange={handlePageChange} />
+        <Pagination
+          limit={limit}
+          result={results}
+          onPageChange={handlePageChange}
+        />
       </div>
       <BenefitsSection />
       <Footer />

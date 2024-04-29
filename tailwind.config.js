@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        'iphone12': '390px',
+      },
       textDecoration: ["hover"],
       colors: {
         primary: "#B88E2F",

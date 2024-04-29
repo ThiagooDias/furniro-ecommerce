@@ -2,9 +2,9 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <div className="py-12 px-24">
+    <div className="py-12 md:px-24 iphone12:px-10">
       <hr className="bg-secondaryText mb-12"/>
-      <div className="grid grid-cols-4">
+      <div className="iphone12:gap-16 iphone12:flex iphone12:flex-col md:grid grid-cols-4">
         <div>
           <h3 className="text-2xl font-bold mb-12">Furniro.</h3>
           <p className="text-secondaryText">
@@ -63,9 +63,9 @@ const Footer: React.FC = () => {
 
         <div>
           <h4 className="text-secondaryText mb-12">Newsletter</h4>
-          <form action="/">
+          <form action="/" className="flex">
             <input
-              className="pb-[1px] mr-3 border-b-[2px] border-gray-400 focus:border-gray-600 focus:outline-none"
+              className="iphone12:w-52 pb-[1px] mr-3 border-b-[2px] border-gray-400 focus:border-gray-600 focus:outline-none"
               type="text"
               placeholder="Enter Your Email Address"
             />

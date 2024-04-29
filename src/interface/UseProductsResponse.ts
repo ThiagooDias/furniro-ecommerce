@@ -1,7 +1,7 @@
-import { Product } from "./Product";
+import { ProductQuery } from "./ProductQuery";
 
 export interface UseProductsResult {
-  products: Product[];
+  productsQuery: ProductQuery | undefined;
   error: string | null;
   loading: boolean;
 }

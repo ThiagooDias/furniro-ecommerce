@@ -40,6 +40,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
     category: "",
     maxPrice: "",
     isNew: false,
+    withDiscount: false,
   });
 
   const handleChange = (
@@ -127,15 +128,16 @@ const FilterModal: React.FC<FilterModalProps> = ({
             <label htmlFor="isNew">New products</label>
           </div>
 
-          {/* <div className="flex items-center">
+          <div className="flex items-center">
             <input
               className="mr-2 size-5"
               type="checkbox"
               name="withDiscount"
               id="withDiscount"
+              onChange={handleChange}
             />
             <label htmlFor="withDiscount">With discount</label>
-          </div> */}
+          </div>
 
           <div className="flex justify-center">
             <ApllyBtn handleSubmit={handleSubmit} />

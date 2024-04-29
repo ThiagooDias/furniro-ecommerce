@@ -1,10 +1,11 @@
 import { FetchProductsParams } from "../interface/FetchProductsParams";
 import { Product } from "../interface/Product";
+import { ProductQuery } from "../interface/ProductQuery";
 import { API } from "./api";
 
 export const fetchProducts = async (
   params: FetchProductsParams
-): Promise<Product[]> => {
+): Promise<ProductQuery> => {
   const queryParams: string[] = [];
 
   const {
@@ -13,6 +14,7 @@ export const fetchProducts = async (
     name,
     category,
     isNew,
+    withDiscount,
     maxPrice,
     sortBy,
     sortDirection,
@@ -38,6 +40,10 @@ export const fetchProducts = async (
     queryParams.push(`isNew=${isNew}`);
   }
 
+  if (withDiscount) {
+    queryParams.push(`withDiscount=${withDiscount}`);
+  }
+
   if (maxPrice) {
     queryParams.push(`maxPrice=${maxPrice}`);
   }
@@ -53,7 +59,7 @@ export const fetchProducts = async (
   const endPoint = `/product?${queryParams.join("&")}`;
 
   try {
-    const response = await API.get<Product[]>(endPoint);
+    const response = await API.get<ProductQuery>(endPoint);
     return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProductById } from "../hooks/useProductById";
 import Loading from "../components/Loading";
@@ -15,17 +15,24 @@ import { useCategoryById } from "../hooks/useCategoryById";
 const ProductDetails: React.FC = () => {
   const { id } = useParams();
   const { product, loading, error } = useProductById(id);
+
   const [activeButtonSize, setActiveSizeButton] = useState<number>(0);
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [color, setColor] = useState<number>(0);
   const [showNotification, setShowNotification] = useState<boolean>(false);
   const [showMoreCount, setShowMoreCount] = useState<number>(1);
   const [limitProducts, setLimitProducts] = useState<number>(4);
+  const [mainImage, setMainImage] = useState<string | undefined>(
+    product?.otherImagesLink[0]
+  );
+
+  useEffect(() => {
+    setMainImage(product?.otherImagesLink[0]);
+  }, [product?.otherImagesLink]);
 
   const navigate = useNavigate();
 
-  const {category} = useCategoryById(product?.categoryId.toString())
-
+  const { category } = useCategoryById(product?.categoryId.toString());
 
   const handleShowMore = () => {
     setShowMoreCount(showMoreCount + 1);
@@ -38,7 +45,7 @@ const ProductDetails: React.FC = () => {
 
   return (
     <div>
-      <div className="flex items-center gap-5 pl-24 mb-8 h-20 bg-secondary-200">
+      <div className="flex items-center gap-5 iphone12:p-4 md:pl-24 mb-8 h-20 bg-secondary-200">
         <span>Home</span>
         <img src={arrowIcon} alt="" />
         <span>Shop</span>
@@ -55,28 +62,37 @@ const ProductDetails: React.FC = () => {
       ) : (
         <div>
           <div className="flex justify-center">
-            <div className="grid grid-cols-2 gap-20">
-              <div className="flex">
-                <div className="flex flex-col gap-8">
+            <div className="grid md:grid-cols-2 iphone12:grid-cols-1 gap-20">
+              <div className="iphone12:grid md:flex gap-5">
+                <div className="flex md:flex-col justify-center order-2 gap-8">
                   {product?.otherImagesLink.map((img, i) => (
                     <img
                       key={i}
-                      className="size-20 object-cover"
+                      className={`size-20 object-cover cursor-pointer ${
+                        mainImage === img
+                          ? "outline outline-8 outline-orange-200"
+                          : ""
+                      }`}
                       src={img}
+                      onClick={() => {
+                        setMainImage(img);
+                      }}
                       alt=""
                     />
                   ))}
                 </div>
 
-                <img
-                  className="h-[500px] w-[460px] object-cover"
-                  src={product?.imageLink}
-                  alt=""
-                />
+                <div className="flex justify-center">
+                  <img
+                    className=" md:h-[500px] md:w-[460px] object-cover"
+                    src={mainImage}
+                    alt=""
+                  />
+                </div>
               </div>
 
-              <div>
-                <h2 className="text-5xl mb-4">{product?.name}</h2>
+              <div className="iphone12:px-5">
+                <h2 className="iphone12:text-4xl md:text-5xl mb-4">{product?.name}</h2>
 
                 <h3 className="text-secondaryText text-2xl mb-4">
                   Rp {product?.price}
@@ -95,7 +111,7 @@ const ProductDetails: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="w-[424px] text-justify mb-6">
+                <p className="iphone12:w-[350px] md:w-[424px] text-justify mb-6">
                   {product?.largeDescription}
                 </p>
 
@@ -160,8 +176,8 @@ const ProductDetails: React.FC = () => {
                   />
                 </div>
 
-                <div className="flex gap-4 mb-14">
-                  <div className="border-2 border-gray-400 rounded-xl py-4 px-4 w-28 flex justify-between items-center">
+                <div className="flex iphone12:flex-col gap-4 mb-14">
+                  <div className="border-2 border-gray-400 rounded-xl iphone12:h-16 md:py-4 px-4 md:w-28 flex justify-between items-center">
                     <button
                       className="p-1"
                       onClick={() => {
@@ -198,7 +214,7 @@ const ProductDetails: React.FC = () => {
                     />
                   )}
 
-                  <button className="px-12 py-4 border-2 border-black rounded-xl hover:border-[3px] hover:font-semibold box-border">
+                  <button className="iphone12:h-16 iphone12:px-6 md:px-12 md:py-4 border-2 border-black rounded-xl hover:border-[3px] hover:font-semibold box-border">
                     + Compare
                   </button>
                 </div>
@@ -231,7 +247,7 @@ const ProductDetails: React.FC = () => {
           <hr className="bg-secondaryText mb-10" />
 
           {/* Description */}
-          <div className="px-48 mb-24">
+          <div className="iphone12:px-10 md:px-48 mb-24">
             <h2 className="font-semibold text-2xl text-center mb-10">
               Description
             </h2>
