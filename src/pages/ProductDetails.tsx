@@ -176,7 +176,7 @@ const ProductDetails: React.FC = () => {
                   />
                 </div>
 
-                <div className="flex iphone12:flex-col gap-4 mb-14">
+                <div className="flex iphone12:flex-col md:flex-row gap-4 mb-14">
                   <div className="border-2 border-gray-400 rounded-xl iphone12:h-16 md:py-4 px-4 md:w-28 flex justify-between items-center">
                     <button
                       className="p-1"
