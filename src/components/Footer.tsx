@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <div className="py-12 md:px-24 iphone12:px-10">
+    <div id="footer" className="py-12 md:px-24 iphone12:px-10">
       <hr className="bg-secondaryText mb-12"/>
       <div className="iphone12:gap-16 iphone12:flex iphone12:flex-col md:grid grid-cols-4">
         <div>

@@ -15,12 +15,17 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const totalPages = Math.ceil((result as number) / limit);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 512});
+  };
+
   const handlePrevClick = () => {
     setCurrentPage((prev) => {
       const newPage = Math.max(prev - 1, 1);
       if (onPageChange) {
         onPageChange(newPage);
       }
+      scrollToTop();
       return newPage;
     });
   };
@@ -31,6 +36,8 @@ const Pagination: React.FC<PaginationProps> = ({
       if (onPageChange) {
         onPageChange(newPage);
       }
+      scrollToTop();
+
       return newPage;
     });
   };
@@ -40,10 +47,11 @@ const Pagination: React.FC<PaginationProps> = ({
       if (onPageChange) {
         onPageChange(page);
       }
+      scrollToTop();
+
       return page;
     });
   };
-  
 
   return (
     <div>
@@ -62,14 +70,19 @@ const Pagination: React.FC<PaginationProps> = ({
         </div>
 
         {currentPage + 1 <= totalPages && (
-          <button className="bg-secondary-200 hover:bg-primary hover:text-white iphone12:text-base md:text-xl iphone12:size-10 md:size-12 flex justify-center items-center rounded-lg" onClick={() => handlePageClick(currentPage + 1)}>
+          <button
+            className="bg-secondary-200 hover:bg-primary hover:text-white iphone12:text-base md:text-xl iphone12:size-10 md:size-12 flex justify-center items-center rounded-lg"
+            onClick={() => handlePageClick(currentPage + 1)}
+          >
             {currentPage + 1}
           </button>
         )}
 
         {currentPage + 2 <= totalPages && (
-          <button className="bg-secondary-200 hover:bg-primary hover:text-white iphone12:text-base md:text-xl iphone12:size-10 md:size-12 flex justify-center items-center rounded-lg"
-          onClick={() => handlePageClick(currentPage + 2)}>
+          <button
+            className="bg-secondary-200 hover:bg-primary hover:text-white iphone12:text-base md:text-xl iphone12:size-10 md:size-12 flex justify-center items-center rounded-lg"
+            onClick={() => handlePageClick(currentPage + 2)}
+          >
             {currentPage + 2}
           </button>
         )}

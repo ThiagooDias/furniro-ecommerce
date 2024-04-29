@@ -64,7 +64,7 @@ const ProductDetails: React.FC = () => {
           <div className="flex justify-center">
             <div className="grid md:grid-cols-2 iphone12:grid-cols-1 gap-20">
               <div className="iphone12:grid md:flex gap-5">
-                <div className="flex md:flex-col justify-center order-2 gap-8">
+                <div className="flex md:flex-col iphone12:justify-center md:justify-start iphone12:order-2 md:order-1 gap-8">
                   {product?.otherImagesLink.map((img, i) => (
                     <img
                       key={i}
@@ -82,7 +82,7 @@ const ProductDetails: React.FC = () => {
                   ))}
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex justify-center iphone12:order-1 md:order-2">
                   <img
                     className=" md:h-[500px] md:w-[460px] object-cover"
                     src={mainImage}

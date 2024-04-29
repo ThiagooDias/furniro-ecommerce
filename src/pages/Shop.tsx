@@ -126,7 +126,7 @@ const Shop: React.FC = () => {
         </div>
       </div>
 
-      <div className="iphone12:grid iphone12:gap-7 iphone12:p-5 md:flex md:h-20 bg-secondary-100 mb-16 md:px-24 justify-between items-center">
+      <div id="filter" className="iphone12:grid iphone12:gap-7 iphone12:p-5 md:flex md:h-20 bg-secondary-100 mb-16 md:px-24 justify-between items-center">
         <div className="flex items-center gap-5">
           <FilterModal onUpdate={handleModalFilterData} />
 

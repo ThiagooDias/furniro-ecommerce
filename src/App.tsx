@@ -1,12 +1,15 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <Outlet />
+      <ScrollToTop>
+        <Navbar />
+        <Outlet />
+      </ScrollToTop>
     </div>
   );
 }
